@@ -1,0 +1,33 @@
+/* Custom CSS for finer adjustments */
+body {
+    background-color: #f8f9fa;
+}
+/* 다크 모드일 때 배경색 */
+[data-bs-theme='dark'] body {
+    background-color: #212529;
+}
+/* 카드 헤더와 리스트 그룹 아이템에 호버 효과 추가 */
+.card-header-link:hover,
+.list-group-item-action:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+[data-bs-theme='dark'] .card-header-link:hover,
+[data-bs-theme='dark'] .list-group-item-action:hover {
+    background-color: rgba(255, 255, 255, 0.075);
+}
+.line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+.nav-tabs .nav-link {
+    border-bottom: 2px solid transparent;
+}
+.nav-tabs .nav-link.active {
+    border-color: #0d6efd;
+    background-color: transparent;
+}
+[data-bs-theme='dark'] .nav-tabs .nav-link.active {
+    border-color: #0d6efd;
+}
