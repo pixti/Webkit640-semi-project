@@ -1,4 +1,5 @@
-Semi-Project: AI 번역 커뮤니티 웹사이트
+[Semi-Project]
+<Google Gemini API를 활용한 AI 번역 기능, 커뮤니티 기본 기능을 제공하는 통합 웹사이트 구축>
 안녕하세요. 이 세미프로젝트는 Webkit640 7기 (2025년 대학·기업 협력형 SW아카데미 사업 풀스택 개발자 양성과정 7기) 에 제출한 
 Node.js와 React.js를 활용하여 개발한 풀스택 웹 애플리케이션입니다. 
 Google Gemini API를 활용한 AI 번역 기능과 함께, 사용자들이 소통할 수 있는 기본적인 커뮤니티 기능을 제공합니다.
