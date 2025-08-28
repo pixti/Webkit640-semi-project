@@ -12,10 +12,26 @@ function TranslatorComponent() {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isPromptSettingsOpen, setIsPromptSettingsOpen] = useState(false);
     const [isThemeOpen, setIsThemeOpen] = useState(false);
+    const [isUrl, setIsUrl] = useState(false); // URL 입력 상태를 추가합니다.
 
-    // useSettings 훅에서 defaultSettings를 받아옵니다.
     const { settings, setSettings, handleSaveSettings, fetchUserSettings, isLoggedIn, defaultSettings } = useSettings();
     const { translatedText, loading, error, tokenCount, handleTranslate } = useTranslation();
+
+    // URL 유효성 검사 함수 추가
+    const isValidUrl = (string) => {
+        try {
+            new URL(string);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    };
+
+    const handleTextInput = (e) => {
+        const inputText = e.target.value;
+        setText(inputText);
+        setIsUrl(isValidUrl(inputText)); // 입력된 텍스트가 URL인지 확인
+    };
 
     const handleCreatePost = () => {
         if (!text || !translatedText) {
@@ -103,16 +119,26 @@ function TranslatorComponent() {
                 )}
 
                 <div className="card-body">
-                    <div className="mb-3">
-                        <label htmlFor="inputText" className="form-label">번역할 텍스트 (또는 URL)</label>
-                        <textarea
-                            className="form-control"
-                            rows="10"
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            placeholder="여기에 텍스트나 URL을 입력하세요."
-                        ></textarea>
+                    <div className="row">
+                        {/* URL 입력 시 원본 페이지를 띄우는 영역 */}
+                        {isUrl && (
+                            <div className="col-md-6 mb-3">
+                                <label className="form-label">원본 페이지</label>
+                                <iframe src={text} title="Original Page" style={{ width: '100%', height: '1080px', border: '1px solid #ccc' }} />
+                            </div>
+                        )}
+                        <div className={`mb-3 ${isUrl ? 'col-md-6' : 'col-md-12'}`}>
+                            <label htmlFor="inputText" className="form-label">번역할 텍스트 (또는 URL)</label>
+                            <textarea
+                                className="form-control"
+                                rows="10"
+                                value={text}
+                                onChange={handleTextInput}
+                                placeholder="여기에 텍스트나 URL을 입력하세요."
+                            ></textarea>
+                        </div>
                     </div>
+
                     <div className="d-flex justify-content-between mb-3">
                         <button
                             className="btn btn-outline-secondary btn-sm"
