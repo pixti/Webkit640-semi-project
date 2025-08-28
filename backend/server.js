@@ -15,6 +15,7 @@ const commentRouter = require('./routes/comments');
 const searchRouter = require('./routes/search');
 const usersRouter = require('./routes/users');
 const translateRouter = require('./routes/translate');
+const proxyRouter = require('./routes/proxy');
 
 // 미들웨어 설정
 app.use(cors());
@@ -80,6 +81,7 @@ app.use('/api/comments', commentRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/translate', translateRouter);
+app.use('/api/proxy', proxyRouter);
 
 // 서버 시작
 app.listen(port, () => {
