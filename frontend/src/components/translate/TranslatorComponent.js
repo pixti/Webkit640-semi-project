@@ -1,3 +1,4 @@
+// frontend/src/components/translate/TranslatorComponent.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useTranslation from '../../hooks/useTranslation';
@@ -12,25 +13,15 @@ function TranslatorComponent() {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isPromptSettingsOpen, setIsPromptSettingsOpen] = useState(false);
     const [isThemeOpen, setIsThemeOpen] = useState(false);
-    const [isUrl, setIsUrl] = useState(false); // URL 입력 상태를 추가합니다.
+    const [isUrl, setIsUrl] = useState(false);
 
     const { settings, setSettings, handleSaveSettings, fetchUserSettings, isLoggedIn, defaultSettings } = useSettings();
     const { translatedText, loading, error, tokenCount, handleTranslate } = useTranslation();
 
-    // URL 유효성 검사 함수 추가
-    const isValidUrl = (string) => {
-        try {
-            new URL(string);
-            return true;
-        } catch (e) {
-            return false;
-        }
-    };
-
     const handleTextInput = (e) => {
         const inputText = e.target.value;
         setText(inputText);
-        setIsUrl(isValidUrl(inputText)); // 입력된 텍스트가 URL인지 확인
+        setIsUrl(inputText.startsWith('http://') || inputText.startsWith('https://'));
     };
 
     const handleCreatePost = () => {
@@ -51,10 +42,12 @@ function TranslatorComponent() {
         });
         const initialTitle = `AI 번역 공유 ${formattedDate} ${formattedTime}`;
 
+        const plainTextContent = new DOMParser().parseFromString(translatedText, 'text/html').body.textContent;
+
         navigate('/create-post', {
             state: {
                 initialTitle: initialTitle,
-                initialContent: `--- 번역할 텍스트 ---\n${text}\n\n--- 번역 결과 ---\n${translatedText}`
+                initialContent: `--- 번역할 텍스트 ---\n${text}\n\n--- 번역 결과 ---\n${plainTextContent}`
             }
         });
     };
@@ -120,11 +113,14 @@ function TranslatorComponent() {
 
                 <div className="card-body">
                     <div className="row">
-                        {/* URL 입력 시 원본 페이지를 띄우는 영역 */}
                         {isUrl && (
                             <div className="col-md-6 mb-3">
                                 <label className="form-label">원본 페이지</label>
-                                <iframe src={text} title="Original Page" style={{ width: '100%', height: '1080px', border: '1px solid #ccc' }} />
+                                <iframe
+                                    src={`http://localhost:5000/api/proxy?url=${encodeURIComponent(text)}`}
+                                    title="Original Page"
+                                    style={{ width: '100%', height: '1080px', border: '1px solid #ccc' }}
+                                />
                             </div>
                         )}
                         <div className={`mb-3 ${isUrl ? 'col-md-6' : 'col-md-12'}`}>
@@ -184,6 +180,8 @@ function TranslatorComponent() {
                                 )}
                             </div>
                         </div>
+
+                        {/* 이 부분이 수정되었습니다. */}
                         <div
                             className={`form-control bg-light ${error ? 'border-danger' : ''}`}
                             style={{
@@ -201,7 +199,8 @@ function TranslatorComponent() {
                             {error ? (
                                 <p className="text-danger small">{error}</p>
                             ) : (
-                                translatedText
+                                // 오류가 없을 때만 dangerouslySetInnerHTML를 사용
+                                <div dangerouslySetInnerHTML={{ __html: translatedText }} />
                             )}
                         </div>
                     </div>
