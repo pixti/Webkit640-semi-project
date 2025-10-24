@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko" data-bs-theme="light">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>반응형 웹 사이트</title>
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous"
+        />
+
+        <!-- Bootstrap Icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
+
+        <!-- Custom CSS for finer adjustments -->
+        <style>
+            body {
+                background-color: #f8f9fa;
+            }
+            /* 다크 모드일 때 배경색 */
+            [data-bs-theme='dark'] body {
+                background-color: #212529;
+            }
+            /* 카드 헤더와 리스트 그룹 아이템에 호버 효과 추가 */
+            .card-header-link:hover,
+            .list-group-item-action:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+            [data-bs-theme='dark'] .card-header-link:hover,
+            [data-bs-theme='dark'] .list-group-item-action:hover {
+                background-color: rgba(255, 255, 255, 0.075);
+            }
+            .line-clamp-1 {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+            }
+            .nav-tabs .nav-link {
+                border-bottom: 2px solid transparent;
+            }
+            .nav-tabs .nav-link.active {
+                border-color: #0d6efd;
+                background-color: transparent;
+            }
+            [data-bs-theme='dark'] .nav-tabs .nav-link.active {
+                border-color: #0d6efd;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- =============================== Header =============================== -->
+        <header class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
+            <nav class="container-lg">
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img
+                        src="https://placehold.co/72x24/000000/FFFFFF?text=Logo"
+                        alt="site-logo"
+                        style="width: 72px"
+                        onerror="this.onerror=null;this.src='https://placehold.co/72x24/cccccc/FFFFFF?text=Logo';"
+                    />
+                    <span class="badge bg-secondary-subtle text-secondary-emphasis ms-2">Hello world</span>
+                </a>
+
+                <!-- Desktop Search Bar -->
+                <div class="flex-grow-1 mx-4 d-none d-lg-block">
+                    <form class="input-group">
+                        <span class="input-group-text bg-body-secondary border-end-0"
+                            ><i class="bi bi-search"></i
+                        ></span>
+                        <input class="form-control border-start-0" type="search" placeholder="검색어를 입력하세요" />
+                    </form>
+                </div>
+
+                <!-- Mobile Search Toggle -->
+                <button
+                    class="btn d-lg-none ms-auto"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mobileSearch"
+                    aria-expanded="false"
+                    aria-controls="mobileSearch"
+                >
+                    <i class="bi bi-search fs-5"></i>
+                </button>
+
+                <!-- Right side buttons -->
+                <div class="d-flex align-items-center">
+                    <a href="#" class="btn btn-outline-secondary d-none d-md-flex align-items-center me-2">
+                        <i class="bi bi-plus-lg me-1"></i>글쓰기
+                    </a>
+                    <button class="btn" type="button"><i class="bi bi-bell fs-5"></i></button>
+                    <button id="theme-toggler" class="btn" type="button">
+                        <i class="bi bi-sun fs-5 d-block"></i>
+                        <i class="bi bi-moon fs-5 d-none"></i>
+                    </button>
+                    <a href="#" class="btn btn-primary rounded-pill ms-2">로그인</a>
+                </div>
+            </nav>
+            <!-- Mobile Search Collapse Area -->
+            <div class="collapse w-100 d-lg-none" id="mobileSearch">
+                <div class="p-3 bg-body-tertiary border-top">
+                    <form class="input-group">
+                        <span class="input-group-text bg-body-secondary border-end-0"
+                            ><i class="bi bi-search"></i
+                        ></span>
+                        <input class="form-control border-start-0" type="search" placeholder="검색어를 입력하세요" />
+                    </form>
+                </div>
+            </div>
+        </header>
+
+        <!-- =============================== Main Content =============================== -->
+        <main class="container-lg my-4">
+            <div class="row g-4">
+                <!-- Left Column (Main Content) -->
+                <div class="col-lg-9">
+                    <div class="vstack gap-4">
+                        <!-- Welcome Box -->
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <h1 class="h4 fw-bold">👋 반응형 웹 사이트에 오신 것을 환영합니다!👋</h1>
+                                <div class="mt-4">
+                                    <h2 class="h6 fw-bold">반응형 웹 사이트 입니다.</h2>
+                                    <p class="small text-muted">
+                                        <a href="#">글쓰기</a> 버튼을 눌러 원하는 글을 작성할 수 있습니다.
+                                    </p>
+                                    <h2 class="h6 fw-bold mt-3">현재는 정적인 부분만 구현되었습니다.</h2>
+                                    <p class="small text-muted">따라서 기능이 동작하지 않습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Post Sections Grid -->
+                        <div class="row g-4">
+                            <!-- Sample Post Section 1 -->
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <a href="#" class="text-decoration-none text-body card-header-link">
+                                        <div
+                                            class="card-header bg-transparent d-flex justify-content-between align-items-center"
+                                        >
+                                            <h3 class="h6 mb-0 fw-bold">
+                                                공지사항 <small class="text-muted fw-normal">공지사항 입니다.</small>
+                                            </h3>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </a>
+                                    <ul class="list-group list-group-flush">
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >공지글 필독!</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">1개월 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >2025/07/30 공지사항 입니다.</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">1일 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1">핫픽스</a>
+                                            <small class="text-muted text-nowrap ms-2">1시간 전</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Sample Post Section 2 -->
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <a href="#" class="text-decoration-none text-body card-header-link">
+                                        <div
+                                            class="card-header bg-transparent d-flex justify-content-between align-items-center"
+                                        >
+                                            <h3 class="h6 mb-0 fw-bold">
+                                                피드백
+                                                <small class="text-muted fw-normal">피드백을 작성해주세요.</small>
+                                            </h3>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </a>
+                                    <ul class="list-group list-group-flush">
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >로그인이 안눌려요...</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">1일 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >이미지 업로드가 불가능</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">1일 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >배경음악도 넣어주세요</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">2일 전</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Sample Post Section 3 -->
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <a href="#" class="text-decoration-none text-body card-header-link">
+                                        <div
+                                            class="card-header bg-transparent d-flex justify-content-between align-items-center"
+                                        >
+                                            <h3 class="h6 mb-0 fw-bold">
+                                                게임 <small class="text-muted fw-normal">종합게임 게시판</small>
+                                            </h3>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </a>
+                                    <ul class="list-group list-group-flush">
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >블루 아카이브</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">1일 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1">repo</a>
+                                            <small class="text-muted text-nowrap ms-2">1일 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >이터널 리턴</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">2일 전</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Sample Post Section 4 -->
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <a href="#" class="text-decoration-none text-body card-header-link">
+                                        <div
+                                            class="card-header bg-transparent d-flex justify-content-between align-items-center"
+                                        >
+                                            <h3 class="h6 mb-0 fw-bold">
+                                                코딩 <small class="text-muted fw-normal"> 코딩 관련 게시판</small>
+                                            </h3>
+                                            <i class="bi bi-chevron-right text-muted"></i>
+                                        </div>
+                                    </a>
+                                    <ul class="list-group list-group-flush">
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1">HTML</a>
+                                            <small class="text-muted text-nowrap ms-2">10시간 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1">CSS</a>
+                                            <small class="text-muted text-nowrap ms-2">1일 전</small>
+                                        </li>
+                                        <li
+                                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                        >
+                                            <a href="#" class="text-decoration-none text-body line-clamp-1"
+                                                >Bootstrap</a
+                                            >
+                                            <small class="text-muted text-nowrap ms-2">1일 전</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (Sidebar) -->
+                <div class="col-lg-3">
+                    <div class="vstack gap-4">
+                        <!-- Quick Links -->
+                        <div class="card">
+                            <div class="card-header bg-transparent">
+                                <h3 class="h6 mb-0 fw-bold">카테고리</h3>
+                            </div>
+                            <div class="list-group list-group-flush">
+                                <a
+                                    href="#"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                >
+                                    <span>공지사항</span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                >
+                                    <span>피드백</span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                >
+                                    <span>게임</span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                >
+                                    <span>코딩</span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                                <a
+                                    href="#"
+                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                                >
+                                    <span>여행</span>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Subscribed/Visited Subs -->
+                        <div class="card">
+                            <div class="card-header p-0 bg-transparent border-bottom-0">
+                                <ul class="nav nav-tabs nav-fill">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">구독한 게시판</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">방문한 게시판</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body text-center text-muted small p-3">
+                                구독한 게시판이 존재하지 않습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- =============================== Footer =============================== -->
+        <footer class="bg-body-tertiary border-top mt-auto py-5">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <h5 class="fw-bold">안녕하세요</h5>
+                        <p class="small text-muted">정적 사이트에요.</p>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <h5 class="fw-semibold">소개</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-decoration-none text-muted">사이트 소개</a></li>
+                            <li><a href="#" class="text-decoration-none text-muted">이용 약관</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="fw-semibold">안내</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="text-decoration-none text-muted">광고 안내</a></li>
+                            <li><a href="#" class="text-decoration-none text-muted">제휴 약관</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- Theme Toggler Script -->
+        <script>
+            const themeToggler = document.getElementById('theme-toggler');
+            const htmlElement = document.documentElement;
+            const sunIcon = themeToggler.querySelector('.bi-sun');
+            const moonIcon = themeToggler.querySelector('.bi-moon');
+
+            // Function to set theme
+            const setTheme = (theme) => {
+                htmlElement.setAttribute('data-bs-theme', theme);
+                if (theme === 'dark') {
+                    sunIcon.classList.add('d-none');
+                    moonIcon.classList.remove('d-none');
+                } else {
+                    sunIcon.classList.remove('d-none');
+                    moonIcon.classList.add('d-none');
+                }
+                localStorage.setItem('theme', theme);
+            };
+
+            // Event listener for the button
+            themeToggler.addEventListener('click', () => {
+                const currentTheme = htmlElement.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+            });
+
+            // Load saved theme from localStorage
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+        </script>
+    </body>
+</html>
